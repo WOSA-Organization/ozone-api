@@ -36,6 +36,11 @@ def ozone():
         }
     response = requests.request("GET", url, headers=headers, params=querystring)
     #print(response.text)
-    return render_template("success_o.html") 
+    r = response.json()
+    lab = r.get("data")
+    temp = list(lab[0].values())
+    temp = temp[0]
+    val = temp["value"]
+    return render_template("success_o.html", oz = val) 
 if __name__ == "__main__":
     app.run(debug=True)
